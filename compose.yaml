@@ -1,0 +1,23 @@
+services:
+  wat-pai-app:
+    build:
+      context: ./node
+      dockerfile: Dockerfile
+      args:
+        NODE_VERSION: "22.11"
+        NPM_VERSION: "10.9.0"
+    ports:
+      - "3000:3000"
+    tty: true
+    volumes:
+      - ./node/app:/var/www/app
+      # これを指定しないとコンテナビルド後にnode_modulesが消失する
+      # また、ホストマウントしないので高速化につながる
+      - node_modules:/var/www/app/node_modules
+    working_dir: /var/www/app
+    # command: bash -c "npm run dev"
+    environment:
+      WATCHPACK_POLLING: true
+
+volumes:
+  node_modules:
