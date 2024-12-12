@@ -1,5 +1,5 @@
 services:
-  wat-pai-app:
+  operator-pai-app:
     build:
       context: ./node
       dockerfile: Dockerfile
